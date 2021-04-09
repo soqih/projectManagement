@@ -23,15 +23,31 @@
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="start">
-        <th mat-header-cell *matHeaderCellDef> Start </th>
+        <th mat-header-cell *matHeaderCellDef> Start Date </th>
         <td mat-cell *matCellDef="let element"> {{element.start}} </td>
     </ng-container>
 
     <ng-container matColumnDef="finish">
-        <th mat-header-cell *matHeaderCellDef> Finish </th>
+        <th mat-header-cell *matHeaderCellDef> Finish Date</th>
         <td mat-cell *matCellDef="let element"> {{element.finish}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="reName">
+        <th mat-header-cell *matHeaderCellDef> Resource Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.reName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="TotalCost">
+        <th mat-header-cell *matHeaderCellDef> Total Cost </th>
+        <td mat-cell *matCellDef="let element"> {{element.cost?element.cost:0}} </td>
+    </ng-container>
+
+    <!-- <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let element">
+            <mat-icon (click)="delete(element)" color="warn">delete</mat-icon>
+        </td>
+    </ng-container> -->
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

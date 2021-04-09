@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "flo-project-40808": {
+      "hosting": {
+        "projectManagement": [
+          "flo-project-40808"
+        ]
+      }
+    }
+  }
+}

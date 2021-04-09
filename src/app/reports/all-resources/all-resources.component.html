@@ -1,45 +1,4 @@
-<div class="inputs">
-    <!-- <div class="inputContainer">
-        <label for="">Task ID </label>
-        <input matInput type="text">
-    </div> -->
-    <mat-form-field>
-        <mat-label>Resource Name</mat-label>
-        <input #name matInput>
-    </mat-form-field>
-
-    <mat-form-field>
-        <mat-label>Type (List)</mat-label>
-        <input #type matInput>
-    </mat-form-field>
-
-    <mat-form-field>
-        <mat-label>Material</mat-label>
-        <input #material matInput>
-    </mat-form-field>
-
-    <mat-form-field>
-        <mat-label>Max</mat-label>
-        <input #max matInput>
-    </mat-form-field>
-
-    <mat-form-field>
-        <mat-label>St.Rate</mat-label>
-        <input #rate matInput>
-    </mat-form-field>
-
-    <mat-form-field>
-        <mat-label>Ovt</mat-label>
-        <input #ovt matInput>
-    </mat-form-field>
-
-    <mat-form-field>
-        <mat-label>Cost/Use</mat-label>
-        <input #cost matInput>
-    </mat-form-field>
-
-    <button mat-raised-button color="primary" (click)="saveResource(name.value, type.value, material.value, max.value, rate.value, ovt.value, cost.value)">Save</button>
-</div>
+<div>
 <table mat-table [dataSource]="resources" class="mat-elevation-z8">
 
     <!--- Note that these columns can be defined in any order.
@@ -84,12 +43,7 @@
         <td mat-cell *matCellDef="let element"> {{element.cost}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="delete">
-        <th mat-header-cell *matHeaderCellDef> </th>
-        <td mat-cell *matCellDef="let element">
-            <mat-icon (click)="delete(element)" color="warn">delete</mat-icon>
-        </td>
-    </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+</div>

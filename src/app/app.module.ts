@@ -9,6 +9,13 @@ import { TasksComponent } from './tasks/tasks.component';
 import { ResourcesComponent } from './resources/resources.component';
 import { AllocationComponent } from './allocation/allocation.component';
 import { AllTasksComponent } from './reports/all-tasks/all-tasks.component';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from 'src/environments/environment';
+import { AllResourcesComponent } from './reports/all-resources/all-resources.component';
+import { AllTasksAndResourcesComponent } from './reports/all-tasks-and-resources/all-tasks-and-resources.component';
+import { TotalCostTaskComponent } from './reports/total-cost-task/total-cost-task.component';
+import { TotalCostProjectComponent } from './reports/total-cost-project/total-cost-project.component';
 
 @NgModule({
   declarations: [
@@ -16,13 +23,19 @@ import { AllTasksComponent } from './reports/all-tasks/all-tasks.component';
     TasksComponent,
     ResourcesComponent,
     AllocationComponent,
-    AllTasksComponent
+    AllTasksComponent,
+    AllResourcesComponent,
+    AllTasksAndResourcesComponent,
+    TotalCostTaskComponent,
+    TotalCostProjectComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

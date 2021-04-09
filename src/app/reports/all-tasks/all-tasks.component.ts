@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Task } from 'src/app/tasks/tasks.component';
 
 const ELEMENT_DATA: Task[] = [
@@ -22,7 +23,12 @@ const ELEMENT_DATA: Task[] = [
 export class AllTasksComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'duration', 'start', 'finish'];
   dataSource = ELEMENT_DATA;
-  constructor() { }
+  tasks:Task[]=[]
+  constructor(private firestore:AngularFirestore) { 
+    firestore.collection<Task>('Tasks').valueChanges().subscribe((t)=>{
+      this.tasks = t;
+    })
+  }
 
   ngOnInit(): void {
   }

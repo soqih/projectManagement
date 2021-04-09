@@ -1,3 +1,6 @@
 button{
     margin: 1rem;
 }
+mat-icon{
+    cursor: pointer;
+}

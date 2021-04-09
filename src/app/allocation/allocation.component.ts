@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Resource } from '../resources/resources.component';
 import { Task } from '../tasks/tasks.component';
 
 const ELEMENT_DATA: Task[] = [
@@ -22,9 +24,26 @@ const ELEMENT_DATA: Task[] = [
 export class AllocationComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'duration', 'start', 'finish', "reName"];
   dataSource = ELEMENT_DATA;
-  constructor() { }
+  resources: Resource[] = [];
+  tasks: Task[] = [];
+  constructor(private firestore: AngularFirestore) {
+    firestore.collection<Resource>('Resources').valueChanges().subscribe((r) => {
+      this.resources = r;
+    })
+    firestore.collection<Task>('Tasks').valueChanges().subscribe((t) => {
+      this.tasks = t;
+    })
+  }
 
   ngOnInit(): void {
+  }
+  allocate(taskID: any, resourceName: any) {
+    if (this.resources.some((r) => r.name == resourceName) && this.tasks.some((t) => t.id == taskID)) {
+      this.firestore.collection<Task>('Tasks').doc(taskID).update({ reName: resourceName })
+    } else {
+      console.error('Resource Name or Task ID is not found')
+    }
+
   }
 
 }

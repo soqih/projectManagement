@@ -1,13 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import {FormGroup, FormControl} from '@angular/forms';
+
+import firebase from 'firebase';
 export interface Task {
   name: string;
   id: number;
   duration: number;
   start: number;
   finish: number;
-  reName: string
+  reName: string;
 }
-
 const ELEMENT_DATA: Task[] = [
   { id: 1, name: 'Hydrogen', duration: 1.0079, start: 1, finish: 1, reName: '' },
   { id: 2, name: 'Helium', duration: 4.0026, start: 1, finish: 1, reName: '' },
@@ -29,15 +32,37 @@ const ELEMENT_DATA: Task[] = [
 export class TasksComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'duration', 'start', 'finish', 'delete'];
   dataSource = ELEMENT_DATA;
-  constructor() { }
+  tasks: Task[] = [];
+    range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl()
+  });
+  constructor(private firestore: AngularFirestore) {
+    firestore.collection<Task>('Tasks').valueChanges().subscribe((tasksCollection) => {
+      this.tasks = tasksCollection;
+    })
+     
+  
+
+  
+  }
 
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
 
-  delete(element: any) {
-    console.log(element.id)
+  }
+
+  delete(element: Task) {
+    this.firestore.collection<Task>('Tasks').doc(element.id.toString()).delete();
   }
   saveTask(id: any, name: any, duration: any, start: any, finish: any) {
-    console.log(id, name, duration, start, finish)
+    if (!(id && name && duration && start && finish)) {
+      console.log('some attributes are missing')
+      return;
+    }
+    var task: Task = { id: id, name: name, duration: Number(duration), start: Number(start), finish: Number(finish), reName: 'not allocated' }
+    // this.firestore.collection<Task>('Tasks').add(task)
+    this.firestore.collection<Task>('Tasks').doc(id).set(task)
+    console.log(task)
   }
 }
