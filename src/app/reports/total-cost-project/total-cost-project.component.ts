@@ -21,7 +21,7 @@ export class TotalCostProjectComponent implements OnInit {
         this.tasks = t;
         var total = 0
         for (var i = 0; i < this.tasks.length; i++) {
-          this.tasks[i].cost = 8 * this.tasks[i].duration * this.resources.get(this.tasks[i].reName)?.rate
+          this.tasks[i].cost = 8 * this.tasks[i].duration * this.resources.get(this.tasks[i].reName)?.rate * (this.resources.get(this.tasks[i].reName)?.max / 100)
           total += this.tasks[i].cost ? this.tasks[i].cost : 0
         }
         this.tasks.push({ id: 'Total Cost', cost: total })

@@ -37,13 +37,16 @@ export class AllocationComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
   allocate(taskID: any, resourceName: any) {
-    if (this.resources.some((r) => r.name == resourceName) && this.tasks.some((t) => t.id == taskID)) {
-      this.firestore.collection<Task>('Tasks').doc(taskID).update({ reName: resourceName })
-    } else {
-      console.error('Resource Name or Task ID is not found')
+    if (this.resources.every((r) => r.name != resourceName)) {
+      alert('ERROR: Resource is not found')
+      return;
     }
-
+    if(this.tasks.every((t) => t.id != taskID)) {
+      alert('ERROR: Task is not found')
+      return;
+    }
+    this.firestore.collection<Task>('Tasks').doc(taskID).update({ reName: resourceName })
   }
-
 }

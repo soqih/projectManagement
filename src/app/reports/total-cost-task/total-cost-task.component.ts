@@ -20,12 +20,9 @@ export class TotalCostTaskComponent implements OnInit {
       firestore.collection<Task>('Tasks').valueChanges().subscribe((t) => {
         this.tasks = t;
         for (var i = 0; i < this.tasks.length; i++) {
-          this.tasks[i].cost = 8 * this.tasks[i].duration * this.resources.get(this.tasks[i].reName)?.rate
+          this.tasks[i].cost = 8 * this.tasks[i].duration * this.resources.get(this.tasks[i].reName)?.rate * (this.resources.get(this.tasks[i].reName)?.max / 100)
         }
-
       })
-
-      // this.usersCollection = new Map(d.map(i => [i.uid, i]));
     })
 
   }

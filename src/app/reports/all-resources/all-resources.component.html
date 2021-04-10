@@ -25,22 +25,22 @@
     <!-- Symbol Column -->
     <ng-container matColumnDef="max">
         <th mat-header-cell *matHeaderCellDef> Max </th>
-        <td mat-cell *matCellDef="let element"> {{element.max}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.max}} %</td>
     </ng-container>
 
     <ng-container matColumnDef="rate">
-        <th mat-header-cell *matHeaderCellDef> Rate </th>
-        <td mat-cell *matCellDef="let element"> {{element.rate}} </td>
+        <th mat-header-cell *matHeaderCellDef> St.Rate </th>
+        <td mat-cell *matCellDef="let element"> {{element.rate}}$/hr </td>
     </ng-container>
 
     <ng-container matColumnDef="ovt">
-        <th mat-header-cell *matHeaderCellDef> Ovt </th>
+        <th mat-header-cell *matHeaderCellDef> Ovt. </th>
         <td mat-cell *matCellDef="let element"> {{element.ovt}} </td>
     </ng-container>
 
     <ng-container matColumnDef="cost">
-        <th mat-header-cell *matHeaderCellDef> Cost </th>
-        <td mat-cell *matCellDef="let element"> {{element.cost}} </td>
+        <th mat-header-cell *matHeaderCellDef> Cost/Use </th>
+        <td mat-cell *matCellDef="let element"> {{element.cost}}$ </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

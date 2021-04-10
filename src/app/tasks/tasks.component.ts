@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import {FormGroup, FormControl} from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 
 import firebase from 'firebase';
 export interface Task {
@@ -33,7 +33,7 @@ export class TasksComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'duration', 'start', 'finish', 'delete'];
   dataSource = ELEMENT_DATA;
   tasks: Task[] = [];
-    range = new FormGroup({
+  range = new FormGroup({
     start: new FormControl(),
     end: new FormControl()
   });
@@ -41,14 +41,14 @@ export class TasksComponent implements OnInit {
     firestore.collection<Task>('Tasks').valueChanges().subscribe((tasksCollection) => {
       this.tasks = tasksCollection;
     })
-     
-  
 
-  
+
+
+
   }
 
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
 
   }
 
@@ -57,12 +57,16 @@ export class TasksComponent implements OnInit {
   }
   saveTask(id: any, name: any, duration: any, start: any, finish: any) {
     if (!(id && name && duration && start && finish)) {
-      console.log('some attributes are missing')
+      alert('ERROR: Some attributes are missing')
       return;
     }
-    var task: Task = { id: id, name: name, duration: Number(duration), start: Number(start), finish: Number(finish), reName: 'not allocated' }
+
+    if (isNaN(duration) /*|| isNaN(start) || isNaN(finish)*/) {
+      alert('ERROR: Duration is not a number')
+      return;
+    }
+    var task: Task = { id: id, name: name, duration: Number(duration), start:start, finish:finish, reName: 'not allocated' }
     // this.firestore.collection<Task>('Tasks').add(task)
     this.firestore.collection<Task>('Tasks').doc(id).set(task)
-    console.log(task)
   }
 }

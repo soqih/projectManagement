@@ -48,23 +48,39 @@ export class ResourcesComponent implements OnInit {
 
   saveResource(name: string, type: any, material: any, max: any, rate: any, ovt: any, cost: any) {
     if (!(name && type&& max && rate /*optional* && ovt && material  && cost*/)) {
-      console.log('some attributes are missing')
+      alert('ERROR: Some attributes are missing')
       return;
     }
+    if (isNaN(max)) {
+      alert('ERROR: Max is not a number')
+      return;
+    }
+    if (isNaN(rate)) {
+      alert('ERROR: Rate is not a number')
+      return;
+    }
+    if (isNaN(ovt)) {
+      alert('ERROR: Ovt is not a number')
+      return;
+    }
+    if (isNaN(cost)) {
+      alert('ERROR: Cost is not a number')
+      return;
+    }
+
     var resource: Resource = {
       id: '',
       name: name,
       type: type,
       material: material,
-      max: max,
-      rate: rate,
-      ovt: ovt,
-      cost: cost
+      max: Number(max),
+      rate: Number(rate),
+      ovt: Number(ovt),
+      cost: Number(cost)
     }
     // this.firestore.collection<Task>('Tasks').add(task)
     this.firestore.collection<Resource>('Resources').add(resource).then((doc) => {
       doc.update({id:doc.id})
      })
-    console.log(resource)
   }
 }

@@ -17,7 +17,7 @@ table{
 }
 mat-form-field{
     height: 1rem;
-    width: 100%;
+    /* width: 100%; */
     margin-bottom: 2rem;
     padding: 1rem;
 }
@@ -28,5 +28,4 @@ button{
 }
 .inputs{
     background-color: rgb(248, 248, 255);
-    margin-bottom: 20px;
 }
